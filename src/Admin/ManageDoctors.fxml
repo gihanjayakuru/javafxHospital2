@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+
+
+<StackPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Admin.ManageDoctorsController">
+   <children>
+      <AnchorPane id="AnchorPane" prefHeight="760.0" prefWidth="1309.0">
+         <children>
+            <AnchorPane layoutX="100.0" layoutY="84.0" prefHeight="760.0" prefWidth="1309.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <JFXTextField fx:id="DocId" layoutX="76.0" layoutY="124.0" prefHeight="31.0" prefWidth="271.0" promptText="User ID" />
+                  <JFXTextField fx:id="DocName" layoutX="76.0" layoutY="203.0" prefHeight="31.0" prefWidth="271.0" promptText="Name" />
+                  <JFXComboBox fx:id="DocOpdIpd" layoutX="82.0" layoutY="289.0" prefHeight="31.0" prefWidth="271.0" promptText="Opd/ipd" />
+                  <JFXComboBox fx:id="DocWord" layoutX="82.0" layoutY="365.0" prefHeight="31.0" prefWidth="271.0" promptText="word" />
+                  <JFXComboBox fx:id="DocPosition" layoutX="82.0" layoutY="437.0" prefHeight="31.0" prefWidth="271.0" promptText="position" />
+                  <TableView fx:id="doctorTable" layoutX="423.0" layoutY="48.0" prefHeight="300.0" prefWidth="847.0" AnchorPane.leftAnchor="423.0" AnchorPane.rightAnchor="39.0">
+                    <columns>
+                      <TableColumn fx:id="docIdcol" prefWidth="287.0" text="ID" />
+                      <TableColumn fx:id="docNamecol" prefWidth="559.0" text="Name" />
+                    </columns>
+                  </TableView>
+                  <TableView fx:id="ManageTable" layoutX="423.0" layoutY="381.0" prefHeight="347.0" prefWidth="847.0" AnchorPane.bottomAnchor="32.0" AnchorPane.leftAnchor="423.0" AnchorPane.rightAnchor="39.0">
+                    <columns>
+                      <TableColumn fx:id="columnId" prefWidth="145.0" text="ID" />
+                      <TableColumn fx:id="columnName" minWidth="0.0" prefWidth="247.0" text="Name" />
+                        <TableColumn fx:id="columnOpdIpd" prefWidth="99.0" text="OPD/IPD" />
+                        <TableColumn fx:id="columnWord" prefWidth="162.0" text="Word" />
+                        <TableColumn fx:id="columnPosition" prefWidth="192.0" text="Position" />
+                    </columns>
+                  </TableView>
+                  <JFXTextField fx:id="search" layoutX="133.0" layoutY="33.0" prefHeight="31.0" prefWidth="271.0" promptText="Search " />
+                  <Label layoutX="423.0" layoutY="23.0" prefHeight="21.0" prefWidth="227.0" text="Doctor table" />
+                  <Label layoutX="423.0" layoutY="355.0" prefHeight="21.0" prefWidth="227.0" text="Manage doctors" />
+                  <JFXButton layoutX="68.0" layoutY="524.0" onAction="#AddManage" text="ADD" />
+                  <JFXButton layoutX="179.0" layoutY="524.0" text="Edit" />
+                  <JFXButton layoutX="282.0" layoutY="524.0" text="DElete" />
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </children>
+</StackPane>

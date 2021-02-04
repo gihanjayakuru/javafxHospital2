@@ -1,0 +1,130 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Jan 25, 2021, 10:33:57 AM
+    Author     : Jayakuru
+*/
+
+*{
+    -fx-primary: #2A2E37;
+    -fx-secondary: #FFFF8D;
+    -fx-primary-text: #B2B2B2;
+    -fx-red: #FF9800;
+}
+
+
+.root{
+    -fx-background-color: #f4f4f4;
+    -fx-font-size:14px;
+    
+    
+}
+.card{
+    -fx-background-color: white;
+    -fx-border-radius: 4.0px;
+    -fx-background-radius: 4.0px
+}
+.loginHead{
+    -fx-background-color: #6747CD;
+    -fx-border-color: #6747CD;
+    -fx-background-radius: 5px;
+    -fx-border-radius: 5px;
+}
+.loginBtn{
+    -fx-background-color: #6747CD;
+    -fx-text-fill: #FFF;
+    -fx-background-radius: 5px;
+}
+.loginBtn:hover{
+    -fx-background-color: transparent;
+    -fx-background-radius: 5px;
+    -fx-text-fill: #6747CD;
+    -fx-border-color: #6747CD;
+    -fx-border-width: 1px;
+    -fx-border-style: solid;
+    -fx-border-radius: 3px;
+}
+.loginbg{
+    -fx-background-color: linear-gradient(to top,#c31399,#9118fd);
+}
+
+.toobar{
+    -fx-background-color: #243A51;
+}
+
+.jfx-hamburger-icon{
+    -fx-spacing: 4px;
+}
+
+.jfx-hamburger StackPane{
+    -fx-background-color: #ffffff;
+    -fx-pref-width: 30px;
+    -fx-background-radius: 5px;
+}
+
+.lbl-status{
+    -fx-background-color: #c0139f;
+    -fx-text-fill: #FFF;
+    -fx-alignment: CENTER;
+    -fx-font-size:12px;
+    -fx-background-radius: 5px;      
+}
+
+.lbl-user{
+    
+    -fx-text-fill: #FFF;
+    -fx-alignment: CENTER;
+    -fx-font-size:12px;
+    -fx-background-radius: 5px;      
+}
+
+.tab-pane{
+    -fx-tab-max-height: 0px;
+   
+}
+
+.tab-pane .tab-header-area{
+    visibility: hidden;
+}
+
+.sidebar{
+    -fx-background-color: rgb(58,69,88);
+}
+
+.sidebar-user-btn{
+    -fx-background-color: transparent;
+    -fx-background-radius: 0px;
+    -fx-text-fill: #b8b1b1;   
+}
+
+.sidebar-btn{
+    -fx-background-color: transparent;
+    -fx-background-radius: 0px;
+    -fx-text-fill: #b8b1b1;   
+}
+
+.sidebar-btn:hover{
+    -fx-background-color: transparent;
+    -fx-background-radius: 0px;
+    -fx-text-fill: #b8b1b1;
+    -fx-border-color: rgb(22,169,250);
+    -fx-border-width: 0px 0px 0px 3px;
+}
+
+.sidebar-btn-icon{ 
+    -fx-fill: #b8b1b1;   
+}
+
+.text-field{
+    -fx-text-fill: -fx-primary-text;
+    -fx-font-size: 13pt;
+    
+}
+
+.wrong-credentails{
+    -jfx-unfocus-color: -fx-red;
+    -jfx-focus-color: -fx-red;
+}
