@@ -21,13 +21,13 @@
                   <JFXComboBox fx:id="DocOpdIpd" layoutX="82.0" layoutY="289.0" prefHeight="31.0" prefWidth="271.0" promptText="Opd/ipd" />
                   <JFXComboBox fx:id="DocWord" layoutX="82.0" layoutY="365.0" prefHeight="31.0" prefWidth="271.0" promptText="word" />
                   <JFXComboBox fx:id="DocPosition" layoutX="82.0" layoutY="437.0" prefHeight="31.0" prefWidth="271.0" promptText="position" />
-                  <TableView fx:id="doctorTable" layoutX="423.0" layoutY="48.0" prefHeight="300.0" prefWidth="847.0" AnchorPane.leftAnchor="423.0" AnchorPane.rightAnchor="39.0">
+                  <TableView fx:id="doctorTable" layoutX="423.0" layoutY="48.0" onMouseClicked="#getDocTbData" prefHeight="300.0" prefWidth="847.0" AnchorPane.leftAnchor="423.0" AnchorPane.rightAnchor="39.0">
                     <columns>
                       <TableColumn fx:id="docIdcol" prefWidth="287.0" text="ID" />
                       <TableColumn fx:id="docNamecol" prefWidth="559.0" text="Name" />
                     </columns>
                   </TableView>
-                  <TableView fx:id="ManageTable" layoutX="423.0" layoutY="381.0" prefHeight="347.0" prefWidth="847.0" AnchorPane.bottomAnchor="32.0" AnchorPane.leftAnchor="423.0" AnchorPane.rightAnchor="39.0">
+                  <TableView fx:id="ManageTable" layoutX="423.0" layoutY="381.0" onMouseClicked="#getMngDocTbData" prefHeight="347.0" prefWidth="847.0" AnchorPane.bottomAnchor="32.0" AnchorPane.leftAnchor="423.0" AnchorPane.rightAnchor="39.0">
                     <columns>
                       <TableColumn fx:id="columnId" prefWidth="145.0" text="ID" />
                       <TableColumn fx:id="columnName" minWidth="0.0" prefWidth="247.0" text="Name" />
@@ -41,7 +41,7 @@
                   <Label layoutX="423.0" layoutY="355.0" prefHeight="21.0" prefWidth="227.0" text="Manage doctors" />
                   <JFXButton layoutX="68.0" layoutY="524.0" onAction="#AddManage" text="ADD" />
                   <JFXButton layoutX="179.0" layoutY="524.0" text="Edit" />
-                  <JFXButton layoutX="282.0" layoutY="524.0" text="DElete" />
+                  <JFXButton layoutX="282.0" layoutY="524.0" text="Delete" />
                </children>
             </AnchorPane>
          </children>
