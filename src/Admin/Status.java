@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package hospitalaa;
+package Admin;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -12,7 +12,7 @@ import javafx.beans.property.StringProperty;
  *
  * @author Jayakuru
  */
-public class Employee {
+public class Status {
 
     private final StringProperty Id;
     private final StringProperty Name;
@@ -20,7 +20,7 @@ public class Employee {
     private final StringProperty Gender;
 
     //default constructer
-    public Employee(String Id, String Name, String Position, String Gender) {
+    public Status(String Id, String Name, String Position, String Gender) {
 
         this.Id = new SimpleStringProperty(Id);
         this.Name = new SimpleStringProperty(Name);

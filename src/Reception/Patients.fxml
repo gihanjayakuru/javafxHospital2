@@ -1,11 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Reception.PatientsController">
-    
+
+<AnchorPane id="AnchorPane" prefHeight="680.0" prefWidth="1134.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="Reception.PatientsController">
+   <children>
+      <JFXTextField fx:id="Pid" layoutX="38.0" layoutY="174.0" prefHeight="31.0" prefWidth="253.0" promptText="Patient ID" />
+      <JFXTextField fx:id="Pname" layoutX="38.0" layoutY="236.0" prefHeight="31.0" prefWidth="253.0" promptText="Patient Name" />
+      <JFXTextField fx:id="Gname" layoutX="38.0" layoutY="292.0" prefHeight="31.0" prefWidth="253.0" promptText="Gardien Name" />
+      <JFXTextField fx:id="gid" layoutX="38.0" layoutY="349.0" prefHeight="31.0" prefWidth="253.0" promptText="Gardien ID" />
+      <JFXTextField fx:id="Gcontact" layoutX="38.0" layoutY="410.0" prefHeight="31.0" prefWidth="253.0" promptText="Gardien Contact" />
+      <TableView fx:id="PatientTable" layoutX="338.0" layoutY="74.0" onMouseClicked="#getTable" prefHeight="371.0" prefWidth="769.0">
+        <columns>
+          <TableColumn fx:id="PatientIdCol" prefWidth="111.0" text="Patient ID" />
+          <TableColumn fx:id="PatientNameCol" prefWidth="112.0" text="Patient Name" />
+            <TableColumn fx:id="GardienNameCol" prefWidth="119.0" text="Gardien Name" />
+            <TableColumn fx:id="GardienIdCol" prefWidth="129.0" text="Gardien ID" />
+            <TableColumn fx:id="GardienContactCol" prefWidth="141.0" text="Gardien Contact" />
+            <TableColumn fx:id="AddressCol" prefWidth="127.0" text="Address" />
+        </columns>
+      </TableView>
+      <JFXTextArea fx:id="Address" layoutX="38.0" layoutY="470.0" prefHeight="170.0" prefWidth="358.0" />
+      <JFXButton layoutX="462.0" layoutY="513.0" onAction="#AddPatients" text="ADD" />
+      <JFXButton layoutX="658.0" layoutY="513.0" onAction="#EditPatient" text="Edit" />
+      <JFXButton layoutX="847.0" layoutY="513.0" onAction="#RemovePatient" text="Remove" />
+   </children>
 </AnchorPane>

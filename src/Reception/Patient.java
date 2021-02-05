@@ -15,72 +15,94 @@ import javafx.beans.property.StringProperty;
  */
 public class Patient {
 
-    private final StringProperty Id;
-    private final StringProperty Name;
-    private final StringProperty Position;
-    private final StringProperty Gender;
+    private final StringProperty PId;
+    private final StringProperty PName;
+    private final StringProperty GName;
+    private final StringProperty GId;
+    private final StringProperty Contact;
+    private final StringProperty Address;
+    
 
     //default constructer
-    public Patient(String Id, String Name, String Position, String Gender) {
+    public Patient(String PId, String PName, String GName, String GId, String Contact, String Address) {
 
-        this.Id = new SimpleStringProperty(Id);
-        this.Name = new SimpleStringProperty(Name);
-        this.Position = new SimpleStringProperty(Position);
-        this.Gender = new SimpleStringProperty(Gender);
+        this.PId = new SimpleStringProperty(PId);
+        this.PName = new SimpleStringProperty(PName);
+        this.GName = new SimpleStringProperty(GName);
+        this.GId = new SimpleStringProperty(GId);
+        this.Contact = new SimpleStringProperty(Contact);
+        this.Address = new SimpleStringProperty(Address);
     }
     
     
     
     //Getters
-    public String getId(){
-        return Id.get();
+    public String getPId(){
+        return PId.get();
     }
-    public String getName(){
-        return Name.get();
+    public String getPName(){
+        return PName.get();
     }
-    public String getPosition(){
-        return Position.get();
+    public String getGName(){
+        return GName.get();
     }
-    public String getGender(){
-        return Gender.get();
+    public String getGId(){
+        return GId.get();
+    }
+    public String getContact(){
+        return Contact.get();
+    }
+    public String getAddress(){
+        return Address.get();
     }
 
     
     
     //Setters
-    public void setId(String value) {
-        Id.set(value);
+    public void setPId(String value) {
+        PId.set(value);
     }
 
-    public void setName(String value) {
-        Name.set(value);
+    public void setPName(String value) {
+        PName.set(value);
     }
 
-    public void setPosition(String value) {
-        Position.set(value);
+    public void setGName(String value) {
+        GName.set(value);
     }
-
-    public void setGender(String value) {
-        Gender.set(value);
+    public void setGId(String value) {
+        GId.set(value);
+    }
+    public void setContact(String value) {
+        Contact.set(value);
+    }
+    public void setAddress(String value) {
+        Address.set(value);
     }
 
     
     
     //Property values
-    public StringProperty IdProperty() {
-        return Id;
+    public StringProperty PIdProperty() {
+        return PId;
     }
 
-    public StringProperty NameProperty() {
-        return Name;
+    public StringProperty PNameProperty() {
+        return PName;
     }
 
-    public StringProperty PositionProperty() {
-        return Position;
+    public StringProperty GNameProperty() {
+        return GName;
+    }
+    public StringProperty GIdProperty() {
+        return GId;
+    }
+    public StringProperty ContactProperty() {
+        return Contact;
     }
 
-    public StringProperty GenderProperty() {
-        return Gender;
+    public StringProperty AddressProperty() {
+        return Address;
     }
 
 }

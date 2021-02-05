@@ -7,7 +7,6 @@ package Admin;
 
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
-import hospitalaa.Employee;
 import hospitalaa.mysqlconnect;
 import java.net.URL;
 import java.sql.Connection;

@@ -3,11 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package hospitalaa;
+package Admin;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
+import hospitalaa.mysqlconnect;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

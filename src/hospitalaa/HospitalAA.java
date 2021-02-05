@@ -19,7 +19,7 @@ public class HospitalAA extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("MainView.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("ReceptionMainView.fxml"));
         
         Scene scene = new Scene(root);
         
