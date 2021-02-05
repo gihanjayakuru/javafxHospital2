@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<StackPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1228.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hospitalaa.MainViewController">
+<StackPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1228.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hospitalaa.AdminMainViewController">
    <children>
       <AnchorPane prefHeight="700.0" prefWidth="1000.0">
          <children>

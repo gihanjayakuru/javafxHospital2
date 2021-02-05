@@ -114,6 +114,7 @@ public class AddEmployeeController implements Initializable {
         String id = Empid.getText().toString();
         String name = EmpName.getText().toString();
         SaveDB(id,name, position,gender);
+        SaveStatusDB(id,name,position);
         populateTableView();
   
         
@@ -293,7 +294,9 @@ public class AddEmployeeController implements Initializable {
         String id = Empid.getText().toString();
         String name = EmpName.getText().toString();
         EditDB(id,name, position,gender);
+        EditStatusDB(id,name,position);
         populateTableView();
+        
         
         
     }
@@ -307,6 +310,7 @@ public class AddEmployeeController implements Initializable {
         String id = Empid.getText().toString();
         
         DeleteDB(id);
+        DeleteStatusDB(id);
         populateTableView();
         
         
@@ -344,6 +348,116 @@ public class AddEmployeeController implements Initializable {
             
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setContentText(id+"\n"+"Fail to Delete Employee!"+"\n"+"Check Valid ID");
+            alert.show();
+            
+            
+        }
+    
+    
+}
+    
+    
+    public void SaveStatusDB(String id, String name, String position){
+  
+      mysqlconnect myconnection =new mysqlconnect();
+      
+      String date="";
+      String AC="";
+ 
+        PreparedStatement st;
+        ResultSet rs;
+        String addQuery="INSERT INTO `activestatus`(`id`, `name`,  `position`, `date`, `ACstatus`) VALUES (?,?,?,?,?)";
+        
+        try {
+            st=myconnection.createConnection().prepareStatement(addQuery);
+            
+            st.setString(1, id);
+            st.setString(2, name);
+            st.setString(3, position); 
+            st.setString(4, date);
+            st.setString(5, AC);
+            
+            
+            if(st.executeUpdate()>0)
+            {
+             System.out.print("SaveStatusDB success!");  
+            }else{
+                System.out.print("SaveStatusDB ....unsuccess!"); 
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(AddEmployeeController.class.getName()).log(Level.SEVERE, null, ex);
+            //return false;
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setContentText(id+"\n"+name+"\n"+"\n"+"Fail to ADD activestatus!"+"\n"+"Check Valid ID");
+            alert.show();
+            
+            
+        }
+        
+  
+  }
+    
+    public void EditStatusDB(String id, String name, String position){
+      
+      
+      mysqlconnect myconnection =new mysqlconnect();
+      PreparedStatement st;
+        ResultSet rs;
+        String addQuery="UPDATE `activestatus` SET `name`=?,`position`=? WHERE `id`=?";
+        
+        try {
+            st=myconnection.createConnection().prepareStatement(addQuery);
+            
+            st.setString(1, name);
+            st.setString(2, position);
+            st.setString(3, id);
+  
+            
+            if(st.executeUpdate()>0)
+            {
+              
+            }else{
+                
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(AddEmployeeController.class.getName()).log(Level.SEVERE, null, ex);
+            
+        }
+
+  
+  }
+    
+    public void DeleteStatusDB(String id){
+  
+      mysqlconnect myconnection =new mysqlconnect();
+ 
+        PreparedStatement st;
+        ResultSet rs;
+        String addQuery="DELETE FROM `activestatus` WHERE `id`=?";
+        
+        try {
+            st=myconnection.createConnection().prepareStatement(addQuery);
+            
+            st.setString(1, id);
+            
+            
+            if(st.executeUpdate()>0)
+            {
+             System.out.print("activestatus success!");  
+            }else{
+                System.out.print("activestatus ....unsuccess!"); 
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(AddEmployeeController.class.getName()).log(Level.SEVERE, null, ex);
+            //return false;
+            
+            
+            
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setContentText(id+"\n"+"Fail to Delete activestatus!"+"\n"+"Check Valid ID");
             alert.show();
             
             

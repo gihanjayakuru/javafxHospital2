@@ -17,15 +17,17 @@ public class Status {
     private final StringProperty Id;
     private final StringProperty Name;
     private final StringProperty Position;
-    private final StringProperty Gender;
+    private final StringProperty Date;
+    private final StringProperty Active;
 
     //default constructer
-    public Status(String Id, String Name, String Position, String Gender) {
+    public Status(String Id, String Name, String Position, String Date, String Active) {
 
         this.Id = new SimpleStringProperty(Id);
         this.Name = new SimpleStringProperty(Name);
         this.Position = new SimpleStringProperty(Position);
-        this.Gender = new SimpleStringProperty(Gender);
+        this.Date = new SimpleStringProperty(Date);
+        this.Active = new SimpleStringProperty(Active);
     }
     
     
@@ -40,8 +42,11 @@ public class Status {
     public String getPosition(){
         return Position.get();
     }
-    public String getGender(){
-        return Gender.get();
+    public String getDate(){
+        return Date.get();
+    }
+    public String getActive(){
+        return Active.get();
     }
 
     
@@ -59,8 +64,11 @@ public class Status {
         Position.set(value);
     }
 
-    public void setGender(String value) {
-        Gender.set(value);
+    public void setDate(String value) {
+        Date.set(value);
+    }
+    public void setActive(String value) {
+        Active.set(value);
     }
 
     
@@ -78,8 +86,11 @@ public class Status {
         return Position;
     }
 
-    public StringProperty GenderProperty() {
-        return Gender;
+    public StringProperty DateProperty() {
+        return Date;
+    }
+    public StringProperty ActiveProperty() {
+        return Active;
     }
 
 }

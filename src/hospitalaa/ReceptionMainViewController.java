@@ -67,6 +67,8 @@ public class ReceptionMainViewController implements Initializable {
 
     @FXML
     private void OPen_Attendance(MouseEvent event) {
+       
+        loadui("/Reception/Attendance");
     }
 
     @FXML
