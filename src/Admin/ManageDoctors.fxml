@@ -9,7 +9,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.StackPane?>
 
-
 <StackPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Admin.ManageDoctorsController">
    <children>
       <AnchorPane id="AnchorPane" prefHeight="760.0" prefWidth="1309.0">
@@ -40,8 +39,8 @@
                   <Label layoutX="423.0" layoutY="23.0" prefHeight="21.0" prefWidth="227.0" text="Doctor table" />
                   <Label layoutX="423.0" layoutY="355.0" prefHeight="21.0" prefWidth="227.0" text="Manage doctors" />
                   <JFXButton layoutX="68.0" layoutY="524.0" onAction="#AddManage" text="ADD" />
-                  <JFXButton layoutX="179.0" layoutY="524.0" text="Edit" />
-                  <JFXButton layoutX="282.0" layoutY="524.0" text="Delete" />
+                  <JFXButton layoutX="179.0" layoutY="524.0" onAction="#EditManage" text="Edit" />
+                  <JFXButton layoutX="282.0" layoutY="524.0" onAction="#RemoveManage" text="Delete" />
                </children>
             </AnchorPane>
          </children>

@@ -93,7 +93,9 @@ public class MainViewController implements Initializable {
 
     @FXML
     private void Open_ManageNurses(MouseEvent event) {
+         loadui("/Admin/ManageNurses");
     }
+    
     
     
 //    private void switchPane(String pane){

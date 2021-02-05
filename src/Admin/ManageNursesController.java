@@ -7,7 +7,6 @@ package Admin;
 
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
-import hospitalaa.AddEmployeeController;
 import hospitalaa.Employee;
 import hospitalaa.mysqlconnect;
 import java.net.URL;
@@ -34,46 +33,45 @@ import javafx.scene.input.MouseEvent;
  *
  * @author Jayakuru
  */
-public class ManageDoctorsController implements Initializable {
-
+public class ManageNursesController implements Initializable {
     @FXML
-    private TableView<Employee> doctorTable;
+    private JFXTextField NurseId;
     @FXML
-    private TableView<MngDoctors> ManageTable;
+    private JFXTextField NurseName;
     @FXML
-    private JFXTextField DocId;
+    private JFXComboBox<String> NurseOpdIpd;
     @FXML
-    private JFXTextField DocName;
+    private JFXComboBox<String> NurseWord;
     @FXML
-    private JFXComboBox<String> DocOpdIpd;
+    private JFXComboBox<String> NursePosition;
     @FXML
-    private JFXComboBox<String> DocWord;
+    private TableView<Employee> nursesTable;
     @FXML
-    private JFXComboBox<String> DocPosition;
+    private TableColumn<Employee, String> NurseIdcol;
     @FXML
-    private TableColumn<Employee, String> docIdcol;
+    private TableColumn<Employee, String> NurseNamecol;
     @FXML
-    private TableColumn<Employee, ?> docNamecol;
+    private TableView<MngNurses> ManageTable;
     @FXML
-    private TableColumn<MngDoctors, String> columnId;
+    private TableColumn<MngNurses, String> columnId;
     @FXML
-    private TableColumn<MngDoctors, String> columnName;
+    private TableColumn<MngNurses, String> columnName;
     @FXML
-    private TableColumn<MngDoctors, String> columnOpdIpd;
+    private TableColumn<MngNurses, String> columnOpdIpd;
     @FXML
-    private TableColumn<MngDoctors, String> columnWord;
+    private TableColumn<MngNurses, String> columnWord;
     @FXML
-    private TableColumn<MngDoctors, String> columnPosition;
+    private TableColumn<MngNurses, String> columnPosition;
     @FXML
     private JFXTextField search;
-
+    
     //Initialize observable list to hold out database 
     private ObservableList<Employee> data;
-    private ObservableList<MngDoctors> data2;
+    private ObservableList<MngNurses> data2;
     //combobox item list Initialize
-    private ObservableList<String> doc1 = FXCollections.observableArrayList("OPD", "IPD");
-    private ObservableList<String> doc2 = FXCollections.observableArrayList("word1", "word2", "word3", "word4");
-    private ObservableList<String> doc3 = FXCollections.observableArrayList("Head", "junior", "Helper");
+    private ObservableList<String> nus1 = FXCollections.observableArrayList("OPD", "IPD");
+    private ObservableList<String> nus2 = FXCollections.observableArrayList("word1", "word2", "word3", "word4");
+    private ObservableList<String> nus3 = FXCollections.observableArrayList("Head", "junior", "Helper");
     //connection mysql
     private mysqlconnect dc;
     //table
@@ -84,39 +82,86 @@ public class ManageDoctorsController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        // TODO
         dc = new mysqlconnect();
         populateTableView();
         populateTableView2();
 
         //combobox items
-        DocOpdIpd.setItems(doc1);
-        DocWord.setItems(doc2);
-        DocPosition.setItems(doc3);
+        NurseOpdIpd.setItems(nus1);
+        NurseWord.setItems(nus2);
+        NursePosition.setItems(nus3);
+    }    
 
-        // TODO
+    @FXML
+    private void getNurseTbData(MouseEvent event) {
+        
+        index = nursesTable.getSelectionModel().getSelectedIndex();
+        if (index <= -1) {
+            return;
+        }
+
+        NurseId.setText(NurseIdcol.getCellData(index).toString());
+        NurseName.setText(NurseNamecol.getCellData(index).toString());
+    }
+
+    @FXML
+    private void getMngNurseTbData(MouseEvent event) {
+        index = ManageTable.getSelectionModel().getSelectedIndex();
+        if (index <= -1) {
+            return;
+        }
+
+        NurseId.setText(columnId.getCellData(index).toString());
+        NurseName.setText(columnName.getCellData(index).toString());
+        NurseOpdIpd.setValue(columnOpdIpd.getCellData(index).toString());
+        NurseWord.setValue(columnWord.getCellData(index).toString());
+        NursePosition.setValue(columnPosition.getCellData(index).toString());
     }
 
     @FXML
     private void AddManage(ActionEvent event) {
-
-        String id = DocId.getText().toString();
-        String name = DocName.getText().toString();
-        String oi = DocOpdIpd.getValue().toString();
-        String word = DocWord.getValue().toString();
-        String position = DocPosition.getValue().toString();
+        String id = NurseId.getText().toString();
+        String name = NurseName.getText().toString();
+        String oi = NurseOpdIpd.getValue().toString();
+        String word = NurseWord.getValue().toString();
+        String position = NursePosition.getValue().toString();
 
         Savedb(id, name, oi, word, position);
 
         populateTableView2();
     }
 
+    @FXML
+    private void EditManage(ActionEvent event) {
+        String id = NurseId.getText().toString();
+        //String name = DocName.getText().toString();
+        String oi = NurseOpdIpd.getValue().toString();
+        String word = NurseWord.getValue().toString();
+        String position = NursePosition.getValue().toString();
+
+        Editdb(id, oi, word, position);
+
+        populateTableView2();
+    }
+
+    @FXML
+    private void RemoveManage(ActionEvent event) {
+        String id = NurseId.getText().toString();
+        
+
+        Removedb(id);
+
+        populateTableView2();
+    }
+    
     private void populateTableView() {
 //       
         try {
             Connection conn = dc.createConnection();
             data = FXCollections.observableArrayList();
             //Execute query and store result in a resultset
-            ResultSet rs = conn.createStatement().executeQuery("SELECT * FROM `employees` WHERE position='Doctor'");//SELECT * FROM employee WHERE position='Doctor'
+            ResultSet rs = conn.createStatement().executeQuery("SELECT * FROM `employees` WHERE position='Nurse'");//SELECT * FROM employee WHERE position='Nurse'
 
             while (rs.next()) {
                 //get String from db,
@@ -127,11 +172,11 @@ public class ManageDoctorsController implements Initializable {
             System.err.println("Error" + ex);
         }
         //set cell values
-        docIdcol.setCellValueFactory(new PropertyValueFactory<>("Id"));
-        docNamecol.setCellValueFactory(new PropertyValueFactory<>("Name"));
+        NurseIdcol.setCellValueFactory(new PropertyValueFactory<>("Id"));
+        NurseNamecol.setCellValueFactory(new PropertyValueFactory<>("Name"));
 
-        doctorTable.setItems(null);
-        doctorTable.setItems(data);
+        nursesTable.setItems(null);
+        nursesTable.setItems(data);
 
         System.out.print("populate table");
     }
@@ -142,11 +187,11 @@ public class ManageDoctorsController implements Initializable {
             Connection conn = dc.createConnection();
             data2 = FXCollections.observableArrayList();
             //Execute query and store result in a resultset
-            ResultSet rs = conn.createStatement().executeQuery("SELECT * FROM `managedoctors`");
+            ResultSet rs = conn.createStatement().executeQuery("SELECT * FROM `managenurse`");
 
             while (rs.next()) {
                 //get String from db,
-                data2.add(new MngDoctors(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)));
+                data2.add(new MngNurses(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)));
             }
 
         } catch (SQLException ex) {
@@ -162,60 +207,7 @@ public class ManageDoctorsController implements Initializable {
         ManageTable.setItems(null);
         ManageTable.setItems(data2);
 
-        System.out.print("populate table Manage");
-    }
-
-    
-
-    @FXML
-    private void getDocTbData(MouseEvent event) {
-        index = doctorTable.getSelectionModel().getSelectedIndex();
-        if (index <= -1) {
-            return;
-        }
-
-        DocId.setText(docIdcol.getCellData(index).toString());
-        DocName.setText(docNamecol.getCellData(index).toString());
-
-    }
-
-    @FXML
-    private void getMngDocTbData(MouseEvent event) {
-        index = ManageTable.getSelectionModel().getSelectedIndex();
-        if (index <= -1) {
-            return;
-        }
-
-        DocId.setText(columnId.getCellData(index).toString());
-        DocName.setText(columnName.getCellData(index).toString());
-        DocOpdIpd.setValue(columnOpdIpd.getCellData(index).toString());
-        DocWord.setValue(columnWord.getCellData(index).toString());
-        DocPosition.setValue(columnPosition.getCellData(index).toString());
-    }
-
-    @FXML
-    private void EditManage(ActionEvent event) {
-        
-        String id = DocId.getText().toString();
-        //String name = DocName.getText().toString();
-        String oi = DocOpdIpd.getValue().toString();
-        String word = DocWord.getValue().toString();
-        String position = DocPosition.getValue().toString();
-
-        Editdb(id, oi, word, position);
-
-        populateTableView2();
-
-    }
-
-    @FXML
-    private void RemoveManage(ActionEvent event) {
-        String id = DocId.getText().toString();
-        
-
-        Removedb(id);
-
-        populateTableView2();
+        System.out.print("populate table MngNurses");
     }
     
     private void Savedb(String id,String name,String oi,String word,String position){
@@ -224,7 +216,7 @@ public class ManageDoctorsController implements Initializable {
  
         PreparedStatement st;
         ResultSet rs;
-        String addQuery="INSERT INTO `managedoctors`(`id`, `name`, `oi`, `word`, `position`) VALUES (?,?,?,?,?)";
+        String addQuery="INSERT INTO `managenurse`(`id`, `name`, `oi`, `word`, `position`) VALUES (?,?,?,?,?)";
         
         try {
             st=myconnection.createConnection().prepareStatement(addQuery);
@@ -265,7 +257,7 @@ public class ManageDoctorsController implements Initializable {
  
         PreparedStatement st;
         ResultSet rs;
-        String addQuery="DELETE FROM `managedoctors` WHERE `id`=?";
+        String addQuery="DELETE FROM `managenurse` WHERE `id`=?";
         
         try {
             st=myconnection.createConnection().prepareStatement(addQuery);
@@ -300,7 +292,7 @@ public class ManageDoctorsController implements Initializable {
  
         PreparedStatement st;
         ResultSet rs;
-        String addQuery="UPDATE `managedoctors` SET `oi`=?,`word`=?,`position`=? WHERE id=?";
+        String addQuery="UPDATE `managenurse` SET `oi`=?,`word`=?,`position`=? WHERE id=?";
         
         try {
             st=myconnection.createConnection().prepareStatement(addQuery);
@@ -329,5 +321,5 @@ public class ManageDoctorsController implements Initializable {
         }
         
     }
-
+    
 }
