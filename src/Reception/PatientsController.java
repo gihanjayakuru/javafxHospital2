@@ -7,6 +7,7 @@ package Reception;
 
 import Admin.AddEmployeeController;
 import Admin.Employee;
+import Admin.Status;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import hospitalaa.mysqlconnect;
@@ -79,6 +80,7 @@ public class PatientsController implements Initializable {
         // TODO
         dc= new mysqlconnect();
         populateTableView();
+        
        
 
        //populateTableView();
@@ -190,6 +192,8 @@ public class PatientsController implements Initializable {
         System.out.print("populate table");
    }
     
+    
+
     
     public void SaveDB(String Pa_id, String Pa_name, String Ga_name, String Ga_id, String Ga_contact,String address){
   

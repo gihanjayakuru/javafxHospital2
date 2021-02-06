@@ -5,10 +5,9 @@
  */
 package Reception;
 
-import Admin.AddEmployeeController;
 import Admin.Employee;
 import Admin.Status;
-import hospitalaa.mysqlconnect;
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
@@ -21,6 +20,7 @@ import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import static java.util.Collections.list;
 import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -30,12 +30,15 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
-
+import javafx.scene.input.MouseEvent;
+import javafx.util.Callback;
 
 /**
  * FXML Controller class
@@ -43,6 +46,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
  * @author Jayakuru
  */
 public class AttendanceController implements Initializable {
+
     @FXML
     private TableView<Status> StatusTable;
     @FXML
@@ -54,7 +58,7 @@ public class AttendanceController implements Initializable {
     @FXML
     private JFXTextField date1;
     @FXML
-    private JFXComboBox<?> Position;
+    private JFXComboBox<String> Position;
     @FXML
     private JFXTextField Name;
     @FXML
@@ -69,19 +73,18 @@ public class AttendanceController implements Initializable {
     private TableColumn<Status, String> STcolumnDate;
     @FXML
     private TableColumn<Status, String> STcolumnPosition;
-    
-    
+
     private ToggleGroup ToggleGroup1;
+
+    //Initialize observable list to hold out database 
+    private ObservableList<Status> dataa;
     
-    
-   //Initialize observable list to hold out database 
-    private ObservableList<Status>dataa;
-    
+    private ObservableList<String> posi = FXCollections.observableArrayList("Doctor","Nurse","Pharmecist","Manager");
+
     private mysqlconnect dc;
-    
-    static String gender;
-    int index= -1;
-    
+
+    static String stat;
+    int index = -1;
 
     /**
      * Initializes the controller class.
@@ -89,70 +92,82 @@ public class AttendanceController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        mysqlconnect myconnection =new mysqlconnect();
+        //mysqlconnect myconnection = new mysqlconnect();
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-    //get current date time with Date()
-     Date date = new Date() {};
-    System.out.println(dateFormat.format(date));
-    String dates = dateFormat.format(date);
-    date1.setText(dates);
+        //get current date time with Date()
+        Date date = new Date() {
+        };
+        System.out.println(dateFormat.format(date));
+        String dates = dateFormat.format(date);
+        date1.setText(dates);
 
-    //get current date time with Calendar()
-    Calendar cal = Calendar.getInstance();
-    System.out.println(dateFormat.format(cal.getTime()));
-    
-    
-     ToggleGroup1 = new ToggleGroup();
-       this.Active.setToggleGroup(ToggleGroup1);
-       this.NotActive.setToggleGroup(ToggleGroup1);
-       
-       //populateTableView3();
-    
-    
-    }    
+        //get current date time with Calendar()
+        Calendar cal = Calendar.getInstance();
+        System.out.println(dateFormat.format(cal.getTime()));
+
+        ToggleGroup1 = new ToggleGroup();
+        this.Active.setToggleGroup(ToggleGroup1);
+        this.NotActive.setToggleGroup(ToggleGroup1);
+        
+        
+        
+        Position.setItems(posi);
+        
+        
+        dc= new mysqlconnect();
+
+        populateTableView3();
+
+    }
 
     @FXML
     private void UpdateStatus(ActionEvent event) {
         
+        String id = ID.getText().toString();
         
+        String date= date1.getText().toString();
+        
+        if(this.ToggleGroup1.getSelectedToggle().equals(this.Active)){
+            stat ="Active";
+        }
+        if(this.ToggleGroup1.getSelectedToggle().equals(this.NotActive)){
+            stat = "Not Active";
+        }
+        EditDB(id,date,stat) ;
+        
+        
+
     }
-    
-    public void EditDB(String id, String name, String position,String date,String active){
-      
-      
-      mysqlconnect myconnection =new mysqlconnect();
-      PreparedStatement st;
+
+    public void EditDB(String id,String date, String active) {
+
+        mysqlconnect myconnection = new mysqlconnect();
+        PreparedStatement st;
         ResultSet rs;
-        String addQuery="UPDATE `activestatus` SET `name`=?,`position`=?,`date`=?,`ACstatus`=? WHERE `id`=?";
-        
+        String addQuery = "UPDATE `activestatus` SET `date`=?,`ACstatus`=? WHERE `id`=?";
+
         try {
-            st=myconnection.createConnection().prepareStatement(addQuery);
+            st = myconnection.createConnection().prepareStatement(addQuery);
+
+            st.setString(1, date);
+            st.setString(2, active);
+            st.setString(3, id);
             
-            st.setString(1, name);
-            st.setString(2, position);
-            st.setString(3, date);
-            st.setString(4, active);
-            st.setString(4, id);
-            
-            
-            if(st.executeUpdate()>0)
-            {
-              
-            }else{
-                
+            if (st.executeUpdate() > 0) {
+
+            } else {
+
             }
-            
+
         } catch (SQLException ex) {
-            Logger.getLogger(AddEmployeeController.class.getName()).log(Level.SEVERE, null, ex);
-            
+            Logger.getLogger(AttendanceController.class.getName()).log(Level.SEVERE, null, ex);
+
         }
 
-  
-  }
+    }
+
     public void populateTableView3() {
-        
-        mysqlconnect sqlcon=new mysqlconnect();
-        
+       
         try {
             Connection conn=dc.createConnection();
             dataa = FXCollections.observableArrayList();
@@ -161,7 +176,7 @@ public class AttendanceController implements Initializable {
             
             while(rs.next()){
                 //get String from db,
-                dataa.add(new Status(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5)));
+                dataa.add(new Status(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)));
             }
             
             
@@ -179,33 +194,6 @@ public class AttendanceController implements Initializable {
         StatusTable.setItems(dataa);
         
         System.out.print("populate table");
-//       
-//        try {
-//            Connection conn=dc.createConnection();
-//            data = FXCollections.observableArrayList();
-//            //Execute query and store result in a resultset
-//            ResultSet rs=conn.createStatement().executeQuery("SELECT * FROM `activestatus`");
-//            
-//            while(rs.next()){
-//                //get String from db,
-//               // data.add(new Status(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)));
-//            }
-//            
-//            
-//        } catch (SQLException ex) {
-//            System.err.println("Error"+ex);
-//        }
-//        //set cell values
-//        STcolumnId.setCellValueFactory(new PropertyValueFactory<>("Id"));
-//        STcolumnName.setCellValueFactory(new PropertyValueFactory<>("Name"));
-//        STcolumnActive.setCellValueFactory(new PropertyValueFactory<>("Position"));
-//        STcolumnDate.setCellValueFactory(new PropertyValueFactory<>("Date"));
-//        STcolumnPosition.setCellValueFactory(new PropertyValueFactory<>("Active"));
-//        
-//        StatusTable.setItems(null);
-//        StatusTable.setItems(data);
-//        
-//        System.out.print("populate table");
-   }
-    
+    }
+
 }
