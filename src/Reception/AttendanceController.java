@@ -134,7 +134,7 @@ public class AttendanceController implements Initializable {
             stat = "Not Active";
         }
         EditDB(id,date,stat) ;
-        
+         populateTableView3();
         
 
     }

@@ -73,6 +73,7 @@ public class ReceptionMainViewController implements Initializable {
 
     @FXML
     private void Open_AddToClinic(MouseEvent event) {
+         loadui("/Reception/AddClinic");
     }
 
     @FXML
